@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Loader, Card, FormField } from "../components";
+import { preview } from "../assets";
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -28,6 +29,7 @@ const Home = () => {
 
         if (response.ok) {
           const result = await response.json();
+          console.log(result);
           setAllPosts(result.data.reverse());
         }
       } catch (error) {
@@ -36,7 +38,8 @@ const Home = () => {
         setLoading(false);
       }
     };
-  });
+    fetchPosts();
+  }, []);
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -67,7 +70,7 @@ const Home = () => {
             )}
           </>
         )}
-        <div className="gird lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
           {searchText ? (
             <RenderCards data={[]} title="No search results found" />
           ) : (
