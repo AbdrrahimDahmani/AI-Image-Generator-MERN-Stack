@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Loader, Card, FormField } from "../components";
 import { preview } from "../assets";
+import { bg } from "../assets";
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
     return data.map((post) => <Card key={post._id} {...post} />);
@@ -61,53 +62,60 @@ const Home = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto">
-      <div>
-        <h1 className="font-bold text-[#222328] text-[32px]">
-          The Community Showcase
-        </h1>
-        <p className="mt-2 text-[#666e75] text-[14px] max-w-[600px]">
-          Browse through the most popular imaginative and visually stunning AI
-          images from the community
-        </p>
-      </div>
-      <div className="mt-16">
-        <FormField
-          labelName="Search Posts"
-          type="text"
-          name="search"
-          placeholder="Search Posts"
-          value={searchText}
-          handleChange={handleSearchChange}
-        />
-      </div>
-      <div className="mt-10">
-        {loading ? (
-          <div className="flex  justify-center items-center">
-            <Loader />
-          </div>
-        ) : (
-          <>
-            {searchText && (
-              <h2 className="font-medium text-[#666e75] text-l mb-3">
-                Showing results for{" "}
-                <span className="text-[#222328]">{searchText}</span>
-              </h2>
-            )}
-          </>
-        )}
-        <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
-          {searchText ? (
-            <RenderCards
-              data={searchedResult}
-              title="No search results found"
-            />
-          ) : (
-            <RenderCards data={allPosts} title="No posts found" />
-          )}
+    <div>
+      <img
+        src={bg}
+        alt="background"
+        className="bg-bgon sd:bg-none m-0 w-full absolute left-0 top-25 scale-[2]"
+      />
+      <section className="max-w-7xl mx-auto relative">
+        <div className="flex flex-col items-center justify-center mt-[100px]">
+          <h1 className="font-bold text-[#45578C] text-[32px] mt-[4rem]">
+            The Community Showcase
+          </h1>
+          <p className="mt-2 text-[#666e75] text-[16px] max-w-[550px] text-center">
+            Browse through the most popular imaginative and visually stunning AI
+            images from the community
+          </p>
         </div>
-      </div>
-    </section>
+        <div className="mt-[5rem]">
+          <FormField
+            // labelName="Search Posts"
+            type="text"
+            name="search"
+            placeholder="Search Posts"
+            value={searchText}
+            handleChange={handleSearchChange}
+          />
+        </div>
+        <div className="mt-10">
+          {loading ? (
+            <div className="flex  justify-center items-center">
+              <Loader />
+            </div>
+          ) : (
+            <>
+              {searchText && (
+                <h2 className="font-medium text-[#666e75] text-l mb-3">
+                  Showing results for{" "}
+                  <span className="text-[#222328]">{searchText}</span>
+                </h2>
+              )}
+            </>
+          )}
+          <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+            {searchText ? (
+              <RenderCards
+                data={searchedResult}
+                title="No search results found"
+              />
+            ) : (
+              <RenderCards data={allPosts} title="No posts found" />
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
