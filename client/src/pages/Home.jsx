@@ -66,14 +66,14 @@ const Home = () => {
       <img
         src={bg}
         alt="background"
-        className="bg-bgon sd:bg-none m-0 w-full absolute left-0 top-25 scale-[2]"
+        className="hidden lg:block m-0 w-full absolute left-0 top-[6rem] scale-[1] sm:bg-none"
       />
       <section className="max-w-7xl mx-auto relative">
-        <div className="flex flex-col items-center justify-center mt-[100px]">
-          <h1 className="font-bold text-[#45578C] text-[32px] mt-[4rem]">
+        <div className="lg:flex lg:flex-col lg:items-center lgjustify-center mt-[100px]">
+          <h1 className="font-bold text-[#45578C] text-[32px] ">
             The Community Showcase
           </h1>
-          <p className="mt-2 text-[#666e75] text-[16px] max-w-[550px] text-center">
+          <p className="mt-2 text-[#666e75] text-[16px] lg:max-w-[550px] lg:text-center">
             Browse through the most popular imaginative and visually stunning AI
             images from the community
           </p>
