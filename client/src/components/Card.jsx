@@ -2,9 +2,34 @@ import React from "react";
 import { download } from "../assets";
 import { downloadImage } from "../utils";
 
+import { useEffect, useRef } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
+
 const Card = ({ _id, name, prompt, photo }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const mainControls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      mainControls.start("visible");
+    }
+  }, [isInView]);
+
   return (
-    <div className="rounded-xl group relative shadow-card hover:shadow-cardhover card">
+    <motion.div
+      ref={ref}
+      key={_id}
+      variants={{
+        hidden: { opacity: 0, y: 75 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      initial="hidden"
+      animate={mainControls}
+      exit="hidden"
+      transition={{ duration: 0.5, delay: 0.25 }}
+      className="rounded-xl group relative shadow-card hover:shadow-cardhover card"
+    >
       <img
         className="w-full h-auto object-cover rounded-xl"
         src={photo}
@@ -34,7 +59,7 @@ const Card = ({ _id, name, prompt, photo }) => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
